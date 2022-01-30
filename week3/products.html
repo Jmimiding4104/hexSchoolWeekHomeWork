@@ -47,8 +47,9 @@
               <td class="text-end">{{item.origin_price}}</td>
               <td class="text-end">{{item.price}}</td>
               <td>
-                <span class="text-success" v-if="item.is_enabled">啟用</span>
-                <span v-else>未啟用</span>
+                <span :class="{'text-success' : item.is_enabled , 'text-danger' : !item.is_enabled}">
+                  {{item.is_enabled?'啟用':'未啟用'}}
+                </span>
               </td>
               <td>
                 <div class="btn-group">
