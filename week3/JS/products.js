@@ -117,7 +117,7 @@ const app = createApp({
 
     this.checkLogin();
 
-    //建立modal實體
+    //建立modal實體(初始化)
     productModal = new bootstrap.Modal(document.getElementById('productModal'), {
       //可透過esc關閉modal
       keyboard: false    
