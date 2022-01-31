@@ -81,18 +81,27 @@
                 <div class="col-sm-4">
                   <div class="mb-2">
                     <div class="mb-3">
-                      <label for="imageUrl" class="form-label">輸入圖片網址</label>
+                      <label for="imageUrl" class="form-label">輸入主圖網址</label>
                       <input type="text" class="form-control" placeholder="請輸入圖片連結" v-model="tempProduct.imageUrl">
+                      <img class="img-fluid" :src="tempProduct.imageUrl" alt="">
                     </div>
-                    <img class="img-fluid" :src="tempProduct.imageUrl" alt="">
+                    <div class="mb-3">
+                      <h6>輸入附圖網址</h6>
+                      <div v-if = "Array.isArray(tempProduct.imagesUrl)">
+                        <div v-for = "(img, key) in tempProduct.imagesUrl" :key = "key + 123456789">
+                          <input type="text" class="form-control" placeholder="請輸入圖片連結" v-model="tempProduct.imagesUrl[key]">
+                          <img class="img-fluid" :src="tempProduct.imagesUrl[key]" alt="">
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div>
-                    <button class="btn btn-outline-primary btn-sm d-block w-100">
+                    <button v-if = "!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length -1]"
+                    class="btn btn-outline-primary btn-sm d-block w-100" @click="tempProduct.imagesUrl.push('')">
                       新增圖片
-                    </button>
-                  </div>
-                  <div>
-                    <button class="btn btn-outline-danger btn-sm d-block w-100">
+                    </button>                  
+                    <button v-else
+                    class="btn btn-outline-danger btn-sm d-block w-100" @click="tempProduct.imagesUrl.pop()">
                       刪除圖片
                     </button>
                   </div>
