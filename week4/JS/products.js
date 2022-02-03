@@ -5,6 +5,9 @@
 //導入Vue
 import {createApp} from"https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.min.js";
 
+//匯入分頁元件
+import pagination from './pagination.js';
+
 //建立modal容器
 //新增與修改modal
 let productModal = ''
@@ -13,6 +16,10 @@ let delProductModal = ''
 
 //建立實體
 const app = createApp({
+  //區域註冊
+  components: {
+    pagination
+  },
   data(){
     return{
       products:[],
@@ -21,6 +28,7 @@ const app = createApp({
         imagesUrl: [],
       },
       isNew:false,
+      //分頁外層名稱
       pagination:{},
       apiUrl:'https://vue3-course-api.hexschool.io/v2',
       apiPath:'dingding248',

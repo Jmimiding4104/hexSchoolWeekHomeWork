@@ -64,6 +64,9 @@
             </tr>
           </tbody>
         </table>
+        <!-- props使用v-bind內(須注意大小寫)="外(不須注意大小寫)" -->
+        <!-- emit使用@內(須注意大小寫)="外"(不須注意大小寫) -->
+        <pagination :pages="pagination" @get-products="getData"></pagination>
       </div>
       <!-- Modal -->
       <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
