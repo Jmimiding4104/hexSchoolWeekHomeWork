@@ -1,3 +1,5 @@
+//剩下圖片的部分
+
 //導入Vue
 import {createApp} from"https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.min.js";
 
@@ -43,7 +45,7 @@ const app = createApp({
         //這句省該為const { products } = res.data;
         //新增'res.data'.product
         this.products = res.data.products;
-        //console.log(this.products)
+        console.log(this.products)
         
       })
       .catch((err)=>{
@@ -115,7 +117,7 @@ const app = createApp({
 
     this.checkLogin();
 
-    //建立modal實體
+    //建立modal實體(初始化)
     productModal = new bootstrap.Modal(document.getElementById('productModal'), {
       //可透過esc關閉modal
       keyboard: false    
