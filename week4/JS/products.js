@@ -1,4 +1,6 @@
-//剩下圖片的部分
+//1.分頁元件
+//2.產品、新增編輯元件
+//3.刪除
 
 //導入Vue
 import {createApp} from"https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.min.js";
@@ -19,6 +21,7 @@ const app = createApp({
         imagesUrl: [],
       },
       isNew:false,
+      pagination:{},
       apiUrl:'https://vue3-course-api.hexschool.io/v2',
       apiPath:'dingding248',
       apiAdmin:'https://vue3-course-api.hexschool.io/v2/api/dingding248/admin'
@@ -38,15 +41,15 @@ const app = createApp({
         window.location = 'login.html'
       })
     },
-    getData(){
+    getData(page = 1){//從下面傳入page
       //all可一次看到所有產品 沒有all產品多會看不到後面的產品
-      axios.get(`${this.apiUrl}/api/${this.apiPath}/admin/products`)
+      axios.get(`${this.apiUrl}/api/${this.apiPath}/admin/products?page=${page}`)//query 
       .then((res)=>{
         //這句省該為const { products } = res.data;
         //新增'res.data'.product
         this.products = res.data.products;
-        console.log(this.products)
-        
+        //console.log(this.products)
+        this.pagination = res.data.pagination;
       })
       .catch((err)=>{
         alert(err.data.message);
