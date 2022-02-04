@@ -91,7 +91,7 @@ const app = createApp({
           this.getData();
         })
         .catch((err)=>{
-          alert(res.data.message);
+          alert(err.data.message);
         })
     },
     delProduct(){
@@ -105,6 +105,10 @@ const app = createApp({
           alert(err.data.message);
         })
     },
+    createImg(){
+      this.tempProduct.imagesUrl=[],
+      this.tempProduct.imagesUrl.push('')
+    }
   },
 
   mounted(){
