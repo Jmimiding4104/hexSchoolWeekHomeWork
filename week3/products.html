@@ -90,14 +90,14 @@
                       <div v-if = "Array.isArray(tempProduct.imagesUrl)">
                         <div v-for = "(img, key) in tempProduct.imagesUrl" :key = "key + 123456789">
                           <input type="text" class="form-control" placeholder="請輸入圖片連結" v-model="tempProduct.imagesUrl[key]">
-                          <img class="img-fluid" :src="tempProduct.imagesUrl[key]" alt="">
+                          <img class="img-fluid" :src="img" alt="">
                         </div>
                       </div>
                     </div>
                   </div>
                   <div>
                     <button v-if = "!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length -1]"
-                    class="btn btn-outline-primary btn-sm d-block w-100" @click="tempProduct.imagesUrl.push('')">
+                    class="btn btn-outline-primary btn-sm d-block w-100" @click="createImg">
                       新增圖片
                     </button>                  
                     <button v-else

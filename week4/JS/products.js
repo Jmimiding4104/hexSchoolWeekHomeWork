@@ -118,6 +118,10 @@ const app = createApp({
           alert(err.data.message);
         })
     },
+    createImg(){
+      this.tempProduct.imagesUrl=[],
+      this.tempProduct.imagesUrl.push('')
+    }
   },
 
   mounted(){
