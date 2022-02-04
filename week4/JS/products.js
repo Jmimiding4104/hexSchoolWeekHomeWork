@@ -9,6 +9,8 @@ import {createApp} from"https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.es
 import {pagination} from './pagination.js';
 
 import {templateProduct} from './templateProduct.js';
+
+import {templateDel} from './templateDel.js';
 //建立modal容器
 //新增與修改modal
 let productModal = ''
@@ -21,6 +23,7 @@ const app = createApp({
   components: {
     pagination,
     templateProduct,
+    templateDel,
   },
   data(){
     return{
@@ -90,17 +93,7 @@ const app = createApp({
       }
     },
 
-    delProduct(){
-      axios.delete(`${this.apiAdmin}/product/${this.tempProduct.id}`)
-        .then((res)=>{
-          alert(res.data.message);
-          delProductModal.hide();
-          this.getData();
-        })
-        .catch((err)=>{
-          alert(err.data.message);
-        })
-    },
+
 
   },
 
