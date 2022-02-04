@@ -6,8 +6,9 @@
 import {createApp} from"https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.min.js";
 
 //匯入分頁元件
-import pagination from './pagination.js';
+import {pagination} from './pagination.js';
 
+import {templateProduct} from './templateProduct.js';
 //建立modal容器
 //新增與修改modal
 let productModal = ''
@@ -18,7 +19,8 @@ let delProductModal = ''
 const app = createApp({
   //區域註冊
   components: {
-    pagination
+    pagination,
+    templateProduct,
   },
   data(){
     return{
@@ -87,26 +89,7 @@ const app = createApp({
         delProductModal.show();
       }
     },
-    updateProduct(){
-      let api = `${this.apiAdmin}/product`
-      let httpMethod = 'post'
 
-      //!反向 若isNew為false
-      if (!this.isNew){
-        api = `${this.apiAdmin}/product/${this.tempProduct.id}`
-        httpMethod = 'put';
-      }
-      //可.可[]
-      axios[httpMethod](api,{data:this.tempProduct})
-        .then((res)=>{
-          alert(res.data.message);
-          productModal.hide();
-          this.getData();
-        })
-        .catch((err)=>{
-          alert(res.data.message);
-        })
-    },
     delProduct(){
       axios.delete(`${this.apiAdmin}/product/${this.tempProduct.id}`)
         .then((res)=>{
@@ -118,10 +101,7 @@ const app = createApp({
           alert(err.data.message);
         })
     },
-    createImg(){
-      this.tempProduct.imagesUrl=[],
-      this.tempProduct.imagesUrl.push('')
-    }
+
   },
 
   mounted(){
