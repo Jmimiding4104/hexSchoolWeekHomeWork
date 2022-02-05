@@ -1,5 +1,5 @@
 export const templateProduct = {
-    props:['temp-product','is-new','productModal'],
+    props:['temp-product','is-new'],
     template:
     `      <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
     aria-hidden="true">
