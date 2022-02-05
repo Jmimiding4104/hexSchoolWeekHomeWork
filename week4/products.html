@@ -72,14 +72,16 @@
       <!-- Modal -->
 
     <template-product 
-    :temp-product="tempProduct"
+    :temp-product = "tempProduct"
     :is-new = "isNew"
+    
     @get-data = "getData"
     >
     </template-product>
 
     <template-del
     :temp-product="tempProduct"
+    @get-data = "getData"
     >      
     </template-del> 
 

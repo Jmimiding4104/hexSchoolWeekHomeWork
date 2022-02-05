@@ -83,7 +83,7 @@ const app = createApp({
         api = `${this.apiAdmin}/product/${this.tempProduct.id}`
         httpMethod = 'put';
       }
-      //可.可[]
+
       axios[httpMethod](api,{data:this.tempProduct})
         .then((res)=>{
           alert(res.data.message);
@@ -91,7 +91,7 @@ const app = createApp({
           this.getData();
         })
         .catch((err)=>{
-          alert(err.data.message);
+          alert(res.data.message);
         })
     },
     delProduct(){

@@ -33,7 +33,8 @@ export const templateDel = {
               .then((res)=>{
                 alert(res.data.message);
                 delProductModal.hide();
-                this.getData();
+                //this.getData();
+                this.$emit('get-data');
               })
               .catch((err)=>{
                 alert(err.data.message);
