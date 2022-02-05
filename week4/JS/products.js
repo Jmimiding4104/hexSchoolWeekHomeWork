@@ -217,9 +217,14 @@ const templateDel = {
 </div>
 </div>
   `,
+  data(){
+    return{
+      apiAdmin:'https://vue3-course-api.hexschool.io/v2/api/dingding248/admin'
+    }
+    },
   methods:{
       delProduct(){
-          axios.delete(`https://vue3-course-api.hexschool.io/v2/api/dingding248/admin/product/${this.tempProduct.id}`)
+          axios.delete(`${this.apiAdmin}/product/${this.tempProduct.id}`)
             .then((res)=>{
               alert(res.data.message);
               delProductModal.hide();

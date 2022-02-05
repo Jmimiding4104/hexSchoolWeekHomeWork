@@ -1,6 +1,6 @@
 export const templateDel = {
     props:['tempProduct'],
-    tenplate:`
+    template:`
     <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
     aria-labelledby="delProductModalLabel" aria-hidden="true">
  <div class="modal-dialog">
@@ -42,3 +42,5 @@ export const templateDel = {
           },
     }
 } 
+
+
