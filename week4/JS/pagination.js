@@ -7,7 +7,8 @@ export const pagination = {
     <ul class="pagination">
       <li class="page-item" 
       :class="{ disabled : !pages.has_pre }">
-        <a class="page-link" href="#" aria-label="Previous">
+        <a class="page-link" href="#" aria-label="Previous"
+        @click="$emit('get-products', pages.current_page - 1)">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
@@ -19,7 +20,8 @@ export const pagination = {
       </li>
       <li class="page-item"
       :class="{ disabled : !pages.has_next }">
-        <a class="page-link" href="#" aria-label="Next">
+        <a class="page-link" href="#" aria-label="Next"
+        @click="$emit('get-products', pages.current_page + 1)">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
