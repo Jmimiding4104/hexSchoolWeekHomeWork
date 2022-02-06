@@ -6,7 +6,7 @@
 import {createApp} from"https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.min.js";
 
 //匯入分頁元件
-import {pagination} from './pagination.js';
+import pagination from './pagination.js';
 
 //import {templateProduct} from './templateProduct.js';
 //import {templateDel} from './templateDel.js';

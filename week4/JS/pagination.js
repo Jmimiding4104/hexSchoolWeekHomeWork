@@ -1,5 +1,5 @@
 //具名匯出
-export const pagination = {
+export default {
     //將資料傳入[內層名稱]
     props: ['pages'],
     //建立元件樣板
