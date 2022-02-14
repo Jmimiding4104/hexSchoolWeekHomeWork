@@ -147,13 +147,17 @@ export default {
         httpMethod = "put";
       }
       //可.可[]
-      axios[httpMethod](api, { data: this.tempProduct }).then((res) => {
-        alert(res.data.message);
-        this.$emit("get-data");
-        productModal.hide();
+      axios[httpMethod](api, { data: this.tempProduct })
+        .then((res) => {
+          alert(res.data.message);
+          this.$emit("get-data");
+          productModal.hide();
 
-        //this.getData();
-      });
+          //this.getData();
+        })
+        .catch((err) => {
+          alert(res.data.message);
+        });
     },
     createImg() {
       (this.tempProduct.imagesUrl = []), this.tempProduct.imagesUrl.push("");
