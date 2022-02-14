@@ -1,7 +1,6 @@
-export const templateProduct = {
-    props:['temp-product','is-new'],
-    template:
-    `      <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
+export default {
+  props: ["temp-product", "is-new"],
+  template: `      <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
     aria-hidden="true">
  <div class="modal-dialog modal-xl">
    <div class="modal-content border-0">
@@ -130,39 +129,40 @@ export const templateProduct = {
      </div>
    </div>
  </div>
-</div>`
-,
-data(){
-  return{
-    apiAdmin:'https://vue3-course-api.hexschool.io/v2/api/dingding248/admin'
-  }
-},
-methods:{
-    updateProduct(){
-        let api = `${this.apiAdmin}/product`
-        let httpMethod = 'post'
+</div>`,
+  data() {
+    return {
+      apiAdmin: "https://vue3-course-api.hexschool.io/v2/api/dingding248/admin",
+      productModal: "",
+    };
+  },
+  methods: {
+    updateProduct() {
+      let api = `${this.apiAdmin}/product`;
+      let httpMethod = "post";
 
-  
-        //!反向 若isNew為false
-        if (!this.isNew){
-          api = `${this.apiAdmin}/product/${this.tempProduct.id}`
-          httpMethod = 'put';
-        }
-        //可.可[]
-        axios[httpMethod](api,{data:this.tempProduct})
-          .then((res)=>{
-            alert(res.data.message);
-            this.$emit('get-data')
-            productModal.hide();
+      //!反向 若isNew為false
+      if (!this.isNew) {
+        api = `${this.apiAdmin}/product/${this.tempProduct.id}`;
+        httpMethod = "put";
+      }
+      //可.可[]
+      axios[httpMethod](api, { data: this.tempProduct }).then((res) => {
+        alert(res.data.message);
+        this.$emit("get-data");
+        productModal.hide();
 
-            //this.getData();
-          })
-
-      },
-      createImg(){
-        this.tempProduct.imagesUrl=[],
-        this.tempProduct.imagesUrl.push('')
-      },
-},
-
-}
+        //this.getData();
+      });
+    },
+    createImg() {
+      (this.tempProduct.imagesUrl = []), this.tempProduct.imagesUrl.push("");
+    },
+    openModal() {
+      this.productModal.show();
+    },
+  },
+  mounted() {
+    this.productModal = new bootstrap.Modal(this.$refs.productModal);
+  },
+};

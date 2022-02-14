@@ -1,6 +1,6 @@
-export const templateDel = {
-    props:['tempProduct'],
-    template:`
+export default {
+  props: ["tempProduct"],
+  template: `
     <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
     aria-labelledby="delProductModalLabel" aria-hidden="true">
  <div class="modal-dialog">
@@ -27,20 +27,32 @@ export const templateDel = {
  </div>
 </div>
     `,
-    methods:{
-        delProduct(){
-            axios.delete(`https://vue3-course-api.hexschool.io/v2/api/dingding248/admin/product/${this.tempProduct.id}`)
-              .then((res)=>{
-                alert(res.data.message);
-                delProductModal.hide();
-                //this.getData();
-                this.$emit('get-data');
-              })
-              .catch((err)=>{
-                alert(err.data.message);
-              })
-          },
-    }
-} 
-
-
+  data() {
+    return {
+      delProductModal: "",
+    };
+  },
+  methods: {
+    delProduct() {
+      axios
+        .delete(
+          `https://vue3-course-api.hexschool.io/v2/api/dingding248/admin/product/${this.tempProduct.id}`
+        )
+        .then((res) => {
+          alert(res.data.message);
+          delProductModal.hide();
+          //this.getData();
+          this.$emit("get-data");
+        })
+        .catch((err) => {
+          alert(err.data.message);
+        });
+    },
+    openModal() {
+      this.delProductModal.show();
+    },
+  },
+  mounted() {
+    this.delProductModal = new bootstrap.Modal(this.$refs.delProductModal);
+  },
+};
