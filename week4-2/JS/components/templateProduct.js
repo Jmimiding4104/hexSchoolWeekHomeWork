@@ -170,3 +170,5 @@ export default {
     this.productModal = new bootstrap.Modal(this.$refs.productModal);
   },
 };
+
+//將modal的方式：直接將modal導入元件，開啟功能使用ref透過html抓入
