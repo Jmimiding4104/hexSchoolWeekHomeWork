@@ -3,6 +3,24 @@ const apiPath = "mimiluckying";
 
 import modal from "./components/userProductModal.js";
 
+const { defineRule, Form, Field, ErrorMessage, configure } = VeeValidate;
+const { required, email, min, max } = VeeValidateRules;
+const { localize, loadLocaleFromURL } = VeeValidateI18n;
+
+defineRule("required", required);
+defineRule("email", email);
+defineRule("min", min);
+defineRule("max", max);
+
+loadLocaleFromURL(
+  "https://unpkg.com/@vee-validate/i18n@4.1.0/dist/locale/zh_TW.json"
+);
+//設定語言
+configure({
+  generateMessage: localize("zh_TW"),
+  validateOnInput: true, // 立即進行驗證
+});
+
 const app = Vue.createApp({
   data() {
     return {
@@ -13,6 +31,13 @@ const app = Vue.createApp({
       cart: {},
       productId: "",
       isLoading: "",
+      user: {
+        email: "",
+        name: "",
+        address: "",
+        phone: "",
+        message: "",
+      },
     };
   },
   components: {
@@ -72,7 +97,13 @@ const app = Vue.createApp({
           //console.log(item);
         });
     },
-
+    sendOrder() {
+      this.$refs.form.resetForm();
+    },
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/;
+      return phoneNumber.test(value) ? true : "需要正確的電話號碼";
+    },
     openModal(id) {
       this.$refs.productsModal.openModal();
       this.productId = id;
@@ -85,4 +116,7 @@ const app = Vue.createApp({
     this.getCarts();
   },
 });
+app.component("VForm", VeeValidate.Form);
+app.component("VField", VeeValidate.Field);
+app.component("ErrorMessage", VeeValidate.ErrorMessage);
 app.mount("#app");
