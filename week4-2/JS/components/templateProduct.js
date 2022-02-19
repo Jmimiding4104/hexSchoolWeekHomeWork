@@ -1,5 +1,5 @@
 export default {
-  props: ["temp-product", "is-new"],
+  props: ["temp-product", "is-new", "id"],
   template: `      <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
     aria-hidden="true">
  <div class="modal-dialog modal-xl">
@@ -132,7 +132,8 @@ export default {
 </div>`,
   data() {
     return {
-      apiAdmin: "https://vue3-course-api.hexschool.io/v2/api/dingding248/admin",
+      apiAdmin:
+        "https://vue3-course-api.hexschool.io/v2/api/mimiluckying/admin",
       productModal: "",
     };
   },
@@ -143,7 +144,7 @@ export default {
 
       //!反向 若isNew為false
       if (!this.isNew) {
-        api = `${this.apiAdmin}/product/${this.tempProduct.id}`;
+        api = `${this.apiAdmin}/product/${this.id}`;
         httpMethod = "put";
       }
       //可.可[]
@@ -151,7 +152,7 @@ export default {
         .then((res) => {
           alert(res.data.message);
           this.$emit("get-data");
-          productModal.hide();
+          this.productModal.hide();
 
           //this.getData();
         })

@@ -75,6 +75,7 @@
       <template-product
         :temp-product="tempProduct"
         :is-new="isNew"
+        :id="productId"
         @get-data="getData"
         ref="productModal"
       >
@@ -82,6 +83,7 @@
 
       <template-del
         :temp-product="tempProduct"
+        :id="productId"
         @get-data="getData"
         ref="delModal"
       >

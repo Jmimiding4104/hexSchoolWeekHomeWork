@@ -29,8 +29,9 @@ const app = createApp({
       //分頁外層名稱
       pagination: {},
       apiUrl: "https://vue3-course-api.hexschool.io/v2",
-      apiPath: "dingding248",
+      apiPath: "mimiluckying",
       apiAdmin: "https://vue3-course-api.hexschool.io/v2/api/dingding248/admin",
+      productId: "",
     };
   },
   methods: {
@@ -56,7 +57,7 @@ const app = createApp({
           //這句省該為const { products } = res.data;
           //新增'res.data'.product
           this.products = res.data.products;
-          //console.log(this.products)
+          //console.log(this.products);
           this.pagination = res.data.pagination;
         })
         .catch((err) => {
@@ -80,10 +81,13 @@ const app = createApp({
         this.tempProduct = JSON.parse(JSON.stringify(item));
         this.isNew = false;
         this.$refs.productModal.openModal();
-        //console.log(this.tempProduct)
+        //console.log(item);
+        this.productId = item.id;
+        //console.log(this.productId);
       } else if (status === "del") {
         this.tempProduct = JSON.parse(JSON.stringify(item));
         this.$refs.delModal.openModal();
+        this.productId = item.id;
       }
     },
   },

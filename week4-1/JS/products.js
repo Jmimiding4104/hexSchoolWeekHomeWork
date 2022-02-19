@@ -291,7 +291,7 @@ const app = createApp({
         });
     },
     //item是v-for跑出的item
-    openModal(status, item) {
+    openModal(status, item, id) {
       if (status === "new") {
         //清空 若無清空會造成再次開啟時 上次輸入的內容仍會在裡面
         this.tempProduct = {
@@ -305,7 +305,7 @@ const app = createApp({
         this.tempProduct = JSON.parse(JSON.stringify(item));
         this.isNew = false;
         productModal.show();
-        //console.log(this.tempProduct)
+        console.log(id);
       } else if (status === "del") {
         this.tempProduct = JSON.parse(JSON.stringify(item));
         delProductModal.show();
