@@ -31,11 +31,13 @@ const app = Vue.createApp({
       cart: {},
       productId: "",
       isLoading: "",
-      user: {
-        email: "",
-        name: "",
-        address: "",
-        phone: "",
+      form: {
+        user: {
+          email: "",
+          name: "",
+          address: "",
+          tel: "",
+        },
         message: "",
       },
     };
@@ -45,16 +47,26 @@ const app = Vue.createApp({
   },
   methods: {
     getProducts() {
-      axios.get(`${apiUrl}/api/${apiPath}/products/all`).then((res) => {
-        this.products = res.data.products;
-        //console.log(res);
-      });
+      axios
+        .get(`${apiUrl}/api/${apiPath}/products/all`)
+        .then((res) => {
+          this.products = res.data.products;
+          //console.log(res);
+        })
+        .catch((err) => {
+          alert(err.data.message);
+        });
     },
     getCarts() {
-      axios.get(`${apiUrl}/api/${apiPath}/cart`).then((res) => {
-        this.cartData = res.data.data;
-        //console.log(this.cartData);
-      });
+      axios
+        .get(`${apiUrl}/api/${apiPath}/cart`)
+        .then((res) => {
+          this.cartData = res.data.data;
+          //console.log(this.cartData);
+        })
+        .catch((err) => {
+          alert(err.data.message);
+        });
     },
     //qty = 1 參數預設值
     addToCart(id, qty = 1) {
@@ -63,24 +75,39 @@ const app = Vue.createApp({
         qty,
       };
       this.isLoading = id;
-      axios.post(`${apiUrl}/api/${apiPath}/cart`, { data }).then((res) => {
-        this.getCarts();
-        this.$refs.productsModal.closeModal();
-        this.isLoading = "";
-      });
+      axios
+        .post(`${apiUrl}/api/${apiPath}/cart`, { data })
+        .then((res) => {
+          this.getCarts();
+          this.$refs.productsModal.closeModal();
+          this.isLoading = "";
+        })
+        .catch((err) => {
+          alert(err.data.message);
+        });
     },
     delCartItem(id) {
       this.isLoading = id;
-      axios.delete(`${apiUrl}/api/${apiPath}/cart/${id}`).then((res) => {
-        this.getCarts();
-        this.isLoading = "";
-      });
+      axios
+        .delete(`${apiUrl}/api/${apiPath}/cart/${id}`)
+        .then((res) => {
+          this.getCarts();
+          this.isLoading = "";
+        })
+        .catch((err) => {
+          alert(err.data.message);
+        });
     },
     delCarts() {
-      axios.delete(`${apiUrl}/api/${apiPath}/carts`).then((res) => {
-        alert("已成功清除購物車");
-        this.getCarts();
-      });
+      axios
+        .delete(`${apiUrl}/api/${apiPath}/carts`)
+        .then((res) => {
+          alert("已成功清除購物車");
+          this.getCarts();
+        })
+        .catch((err) => {
+          alert(err.data.message);
+        });
     },
     updateCarts(item) {
       const data = {
@@ -95,10 +122,21 @@ const app = Vue.createApp({
 
           this.isLoading = "";
           //console.log(item);
+        })
+        .catch((err) => {
+          alert(err.data.message);
         });
     },
     sendOrder() {
-      this.$refs.form.resetForm();
+      axios
+        .post(`${apiUrl}/api/${apiPath}/order`, { data: this.form })
+        .then((res) => {
+          alert(res.data.message);
+          this.$refs.form.resetForm();
+        })
+        .catch((err) => {
+          alert(err.data.message);
+        });
     },
     isPhone(value) {
       const phoneNumber = /^(09)[0-9]{8}$/;

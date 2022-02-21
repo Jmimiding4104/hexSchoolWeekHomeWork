@@ -176,7 +176,7 @@
               :class="{ 'is-invalid': errors['email'] }"
               placeholder="請輸入 Email"
               rules="email|required"
-              v-model="user.email"
+              v-model="form.user.email"
             ></v-field>
             <error-message
               name="email"
@@ -194,7 +194,7 @@
               :class="{ 'is-invalid': errors['姓名'] }"
               placeholder="請輸入姓名"
               rules="required"
-              v-model="user.name"
+              v-model="form.user.name"
             ></v-field>
             <error-message name="姓名" class="invalid-feedback"></error-message>
           </div>
@@ -209,7 +209,7 @@
               :class="{ 'is-invalid': errors['手機'] }"
               placeholder="請輸入手機"
               :rules="isPhone"
-              v-model="user.phone"
+              v-model="form.user.tel"
             ></v-field>
             <error-message name="手機" class="invalid-feedback"></error-message>
           </div>
@@ -224,7 +224,7 @@
               :class="{ 'is-invalid': errors['地址'] }"
               placeholder="請輸入地址"
               rules="required"
-              v-model="user.address"
+              v-model="form.user.address"
             ></v-field>
             <error-message name="地址" class="invalid-feedback"></error-message>
           </div>
@@ -236,11 +236,15 @@
               class="form-control"
               cols="30"
               rows="10"
-              v-model="user.message"
+              v-model="form.message"
             ></textarea>
           </div>
           <div class="text-end">
-            <button type="submit" class="btn btn-danger" @click="sendOrder()">
+            <button
+              type="submit"
+              class="btn btn-danger"
+              @click.prevent="sendOrder()"
+            >
               送出訂單
             </button>
           </div>

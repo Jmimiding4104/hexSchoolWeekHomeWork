@@ -63,10 +63,15 @@ export default {
     },
     getProduct() {
       //從外部的資料要this.才能取得
-      axios.get(`${apiUrl}/api/${apiPath}/product/${this.id}`).then((res) => {
-        this.product = res.data.product;
-        //console.log(res);
-      });
+      axios
+        .get(`${apiUrl}/api/${apiPath}/product/${this.id}`)
+        .then((res) => {
+          this.product = res.data.product;
+          //console.log(res);
+        })
+        .catch((err) => {
+          alert(err.data.message);
+        });
     },
     addToCart() {
       this.$emit("add-to-cart", this.product.id, this.qty);
