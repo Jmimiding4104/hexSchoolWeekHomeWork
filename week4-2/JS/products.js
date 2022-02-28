@@ -79,6 +79,9 @@ const app = createApp({
       } else if (status === "edit") {
         //改為深層拷貝，避免第二層傳參考的問題JSON.parse(JSON.stringify(obj1))
         this.tempProduct = JSON.parse(JSON.stringify(item));
+        this.tempProduct.imagesUrl = this.tempProduct.imagesUrl
+          ? this.tempProduct.imagesUrl
+          : [];
         this.isNew = false;
         this.$refs.productModal.openModal();
         //console.log(item);

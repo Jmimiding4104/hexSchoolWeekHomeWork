@@ -30,7 +30,7 @@ export default {
              </div>
            </div>
            <div>
-             <button v-if = "!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length -1]"
+             <button v-if = "!tempProduct.imagesUrl?.length||tempProduct.imagesUrl[tempProduct.imagesUrl.length -1]"
              class="btn btn-outline-primary btn-sm d-block w-100" @click="createImg">
                新增圖片
              </button>                  
@@ -161,7 +161,7 @@ export default {
         });
     },
     createImg() {
-      (this.tempProduct.imagesUrl = []), this.tempProduct.imagesUrl.push("");
+      this.tempProduct.imagesUrl.push("");
     },
     openModal() {
       this.productModal.show();

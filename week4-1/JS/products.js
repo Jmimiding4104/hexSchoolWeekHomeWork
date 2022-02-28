@@ -254,7 +254,7 @@ const app = createApp({
       //分頁外層名稱
       pagination: {},
       apiUrl: "https://vue3-course-api.hexschool.io/v2",
-      apiPath: "dingding248",
+      apiPath: "mimiluckying",
       apiAdmin: "https://vue3-course-api.hexschool.io/v2/api/dingding248/admin",
     };
   },
