@@ -31,7 +31,7 @@
              <button v-if = "!tempProduct.imagesUrl?.length||tempProduct.imagesUrl[tempProduct.imagesUrl.length -1]"
              class="btn btn-outline-primary btn-sm d-block w-100" @click="createImg">
                新增圖片
-             </button>                  
+             </button>
              <button v-else
              class="btn btn-outline-danger btn-sm d-block w-100" @click="tempProduct.imagesUrl.pop()">
                刪除圖片
@@ -41,28 +41,28 @@
          <div class="col-sm-8">
            <div class="mb-3">
              <label for="title" class="form-label" >標題</label>
-             <input id="title" 
-             type="text" 
-             class="form-control" 
-             placeholder="請輸入標題" 
+             <input id="title"
+             type="text"
+             class="form-control"
+             placeholder="請輸入標題"
              v-model="tempProduct.title">
            </div>
 
            <div class="row">
              <div class="mb-3 col-md-6">
                <label for="category" class="form-label">分類</label>
-               <input id="category" 
-               type="text" 
+               <input id="category"
+               type="text"
                class="form-control"
-               placeholder="請輸入分類" 
+               placeholder="請輸入分類"
                v-model="tempProduct.category">
              </div>
              <div class="mb-3 col-md-6">
                <label for="price" class="form-label">單位</label>
-               <input id="unit" 
-               type="text" 
-               class="form-control" 
-               placeholder="請輸入單位" 
+               <input id="unit"
+               type="text"
+               class="form-control"
+               placeholder="請輸入單位"
                v-model="tempProduct.unit">
              </div>
            </div>
@@ -70,18 +70,18 @@
            <div class="row">
              <div class="mb-3 col-md-6">
                <label for="origin_price" class="form-label">原價</label>
-               <input id="origin_price" 
-               type="number" 
-               min="0" 
-               class="form-control" 
-               placeholder="請輸入原價" 
+               <input id="origin_price"
+               type="number"
+               min="0"
+               class="form-control"
+               placeholder="請輸入原價"
                v-model.number="tempProduct.origin_price">
              </div>
              <div class="mb-3 col-md-6">
                <label for="price" class="form-label">售價</label>
-               <input id="price" 
-               type="number" 
-               min="0" 
+               <input id="price"
+               type="number"
+               min="0"
                class="form-control"
                placeholder="請輸入售價"
                v-model.number="tempProduct.price">
@@ -91,8 +91,8 @@
 
            <div class="mb-3">
              <label for="description" class="form-label">產品描述</label>
-             <textarea id="description" 
-             type="text" 
+             <textarea id="description"
+             type="text"
              class="form-control"
              placeholder="請輸入產品描述"
              v-model="tempProduct.description">
@@ -100,8 +100,8 @@
            </div>
            <div class="mb-3">
              <label for="content" class="form-label">說明內容</label>
-             <textarea id="description" 
-             type="text" 
+             <textarea id="description"
+             type="text"
              class="form-control"
              placeholder="請輸入說明內容"
              v-model="tempProduct.content">
@@ -131,8 +131,40 @@
 </template>
 
 <script>
-import { modal } from 'bootstrap'
+import { Modal } from 'bootstrap'
 export default {
-    
+  props: [],
+  data () {
+    return {
+      productModal: ''
+    }
+  },
+  methods: {
+    updateProduct () {
+      let api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product`
+      let httpMethod = 'post'
+      if (!this.isNew) {
+        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${this.id}`
+        httpMethod = 'put'
+      } this.$http[httpMethod](api, { data: this.tempProduct })
+        .then((res) => {
+          alert(res.data.message)
+          this.$emit('get-data')
+          this.productModal.hide()
+        })
+        .catch((err) => {
+          alert(err.data.message)
+        })
+    },
+    createImg () {
+      this.tempProduct.imagesUrl.push('')
+    },
+    openModal () {
+      this.productModal.show()
+    }
+  },
+  mounted () {
+    this.productModal = new Modal(this.$refs.productModal)
+  }
 }
 </script>

@@ -51,6 +51,7 @@
             </tbody>
         </table>
     </div>
+<TemplateProduct></TemplateProduct>
 </template>
 
 <style lang="scss">
@@ -69,6 +70,7 @@ img {
 </style>
 
 <script>
+import TemplateProduct from '@/components/TemplateProduct'
 export default {
   data () {
     return {
@@ -80,6 +82,9 @@ export default {
       isNew: false,
       productId: ''
     }
+  },
+  components: {
+    TemplateProduct
   },
   methods: {
     getData (page = 1) {
