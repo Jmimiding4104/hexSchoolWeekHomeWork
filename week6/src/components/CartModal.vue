@@ -65,7 +65,10 @@
 </template>
 
 <script>
+import { Modal } from 'bootstrap'
+
 export default {
+  props: ['id'],
   data () {
     return {
       productModal: '',
@@ -100,7 +103,7 @@ export default {
     }
   },
   mounted () {
-    this.productModal = new bootstrap.Modal(this.$refs.productModal)
+    this.productModal = new Modal(this.$refs.productModal)
   }
 }
 </script>

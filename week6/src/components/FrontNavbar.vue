@@ -28,7 +28,43 @@
                         </router-link>
                     </li>
                 </ul>
+                <div
+                type="button"
+                class="btn btn-primary position-relative"
+                >
+                    結帳
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{cartData.carts?.length}}
+                        </span>
+                </div>
             </div>
         </div>
     </nav>
 </template>
+
+<script>
+import emitter from '@/libs/emitter'
+export default {
+  data () {
+    return {
+      cartData: {}
+    }
+  },
+  methods: {
+    getCart () {
+      this.$http
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`)
+        .then((res) => {
+          this.cartData = res.data.data
+        })
+        .catch((err) => {
+          alert(err.data.message)
+        })
+    }
+  },
+  mounted () {
+    this.getCart()
+    emitter.on('get-cart', () => this.getCart())
+  }
+}
+</script>

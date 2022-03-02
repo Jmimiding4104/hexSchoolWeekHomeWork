@@ -3,7 +3,7 @@
   <div class="container">
     <div class="mt-4">
       <!-- 產品Modal -->
-      <CartModal></CartModal>
+      <CartModal ref="productsModal" :id="productId" @add-to-cart="addToCart"></CartModal>
       <!-- 產品Modal -->
 
       <table class="table align-middle">
@@ -149,6 +149,7 @@
 
 <script>
 import CartModal from '@/components/CartModal'
+import emitter from '@/libs/emitter'
 
 export default {
   data () {
@@ -213,6 +214,7 @@ export default {
           this.getCarts()
           // this.$refs.productsModal.closeModal()
           this.isLoading = ''
+          emitter.emit('get-cart')
         })
         .catch((err) => {
           alert(err.data.message)
@@ -227,6 +229,7 @@ export default {
         .then((res) => {
           this.getCarts()
           this.isLoading = ''
+          emitter.emit('get-cart')
         })
         .catch((err) => {
           alert(err.data.message)
@@ -240,6 +243,7 @@ export default {
         .then((res) => {
           alert('已成功清除購物車')
           this.getCarts()
+          emitter.emit('get-cart')
         })
         .catch((err) => {
           alert(err.data.message)
@@ -287,8 +291,7 @@ export default {
     openModal (id) {
       this.$refs.productsModal.openModal()
       this.productId = id
-
-      // this.$refs.productsModal.getProduct();
+      this.$refs.productsModal.getProduct()
     }
   },
   mounted () {
