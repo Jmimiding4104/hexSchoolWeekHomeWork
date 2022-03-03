@@ -3,7 +3,7 @@
   <div class="container">
     <div class="mt-4">
       <!-- 產品Modal -->
-      <CartModal ref="productsModal" :id="productId" @add-to-cart="addToCart"></CartModal>
+      <CartModal ref="CartModal" :id="productId" @add-to-cart="addToCart"></CartModal>
       <!-- 產品Modal -->
 
       <table class="table align-middle">
@@ -174,7 +174,8 @@ export default {
     }
   },
   components: {
-    CartForm
+    CartForm,
+    CartModal
   },
   methods: {
     getProducts () {
@@ -272,9 +273,9 @@ export default {
         })
     },
     openModal (id) {
-      this.$refs.productsModal.openModal()
+      this.$refs.CartModal.openModal()
       this.productId = id
-      this.$refs.productsModal.getProduct()
+      this.$refs.CartModal.getProduct()
     }
   },
   mounted () {

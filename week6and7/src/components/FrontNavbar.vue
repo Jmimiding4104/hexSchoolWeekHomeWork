@@ -33,7 +33,8 @@
                         </router-link>
                     </li>
                 </ul>
-                <div
+                <router-link
+                to="/Cart"
                 type="button"
                 class="btn btn-primary position-relative"
                 >
@@ -41,7 +42,7 @@
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{cartData.carts?.length}}
                         </span>
-                </div>
+                </router-link>
             </div>
         </div>
     </nav>
