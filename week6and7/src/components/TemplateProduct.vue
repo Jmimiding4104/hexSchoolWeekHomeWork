@@ -133,7 +133,7 @@
 <script>
 import { Modal } from 'bootstrap'
 export default {
-  props: [],
+  props: ['isNew', 'temp-product', 'id'],
   data () {
     return {
       productModal: ''
@@ -149,7 +149,7 @@ export default {
       } this.$http[httpMethod](api, { data: this.tempProduct })
         .then((res) => {
           alert(res.data.message)
-          this.$emit('get-data')
+          this.$emit('getData')
           this.productModal.hide()
         })
         .catch((err) => {

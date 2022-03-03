@@ -143,13 +143,14 @@
         </tfoot>
       </table>
     </div>
-
+<CartForm></CartForm>
   </div>
 </template>
 
 <script>
 import CartModal from '@/components/CartModal'
 import emitter from '@/libs/emitter'
+import CartForm from '@/components/CartForm'
 
 export default {
   data () {
@@ -163,17 +164,17 @@ export default {
       isLoading: '',
       form: {
         user: {
-          email: '',
-          name: '',
-          address: '',
-          tel: ''
+          email: "",
+          name: "",
+          address: "",
+          tel: "",
         },
-        message: ''
-      }
+        message: "",
+      },
     }
   },
   components: {
-    CartModal
+    CartForm
   },
   methods: {
     getProducts () {
@@ -269,24 +270,6 @@ export default {
         .catch((err) => {
           alert(err.data.message)
         })
-    },
-    sendOrder () {
-      this.$http
-        .post(
-          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`,
-          { data: this.form }
-        )
-        .then((res) => {
-          alert(res.data.message)
-          this.$refs.form.resetForm()
-        })
-        .catch((err) => {
-          alert(err.data.message)
-        })
-    },
-    isPhone (value) {
-      const phoneNumber = /^(09)[0-9]{8}$/
-      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
     },
     openModal (id) {
       this.$refs.productsModal.openModal()

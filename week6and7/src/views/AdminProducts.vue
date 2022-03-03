@@ -51,7 +51,8 @@
             </tbody>
         </table>
     </div>
-<TemplateProduct></TemplateProduct>
+<TemplateProduct :isNew="isNew" :temp-product="tempProduct" :id="productId" @getData="getData" ref="TemplateProduct"></TemplateProduct>
+<DelProduct :id="productId" :tempProduct="tempProduct" @getData="getData" ref="DelProduct"></DelProduct>
 </template>
 
 <style lang="scss">
@@ -71,6 +72,7 @@ img {
 
 <script>
 import TemplateProduct from '@/components/TemplateProduct'
+import DelProduct from '@/components/DelProduct'
 export default {
   data () {
     return {
@@ -84,7 +86,8 @@ export default {
     }
   },
   components: {
-    TemplateProduct
+    TemplateProduct,
+    DelProduct
   },
   methods: {
     getData (page = 1) {
@@ -104,16 +107,16 @@ export default {
           imagesUrl: []
         }
         this.isNew = true
-        // $ref
+        this.$refs.TemplateProduct.openModal()
       } else if (status === 'edit') {
         this.tempProduct = JSON.parse(JSON.stringify(item))
         this.tempProduct.imagesUrl = this.tempProduct.imagesUrl ? this.tempProduct.imagesUrl : []
         this.isNew = false
-        // $ref
+        this.$refs.TemplateProduct.openModal()
         this.productId = item.id
       } else if (status === 'del') {
         this.tempProduct = JSON.parse(JSON.stringify(item))
-        // $ref
+        this.$refs.DelProduct.openModal()
         this.productId = item.id
       }
     }

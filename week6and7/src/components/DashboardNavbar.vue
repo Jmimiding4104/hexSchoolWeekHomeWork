@@ -14,7 +14,28 @@
           <router-link class="nav-link" to="/admin/AdminCouple">優惠券管理</router-link>
         </li>
       </ul>
+      <div type="button" class="btn btn-primary position-relative" @click="logOut">
+        登出並回到前台
+      </div>
     </div>
   </div>
 </nav>
 </template>
+
+<script>
+export default {
+  methods: {
+    logOut () {
+      this.$http
+        .post(`${process.env.VUE_APP_API}/logout`)
+        .then((res) => {
+          alert(res.data.message)
+          this.$router.push('/')
+        })
+        .catch(() => {
+          alert('請重新嘗試!')
+        })
+    }
+  }
+}
+</script>
