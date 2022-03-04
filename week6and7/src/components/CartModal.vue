@@ -100,6 +100,7 @@ export default {
     },
     addToCart () {
       this.$emit('add-to-cart', this.product.id, this.qty)
+      this.closeModal()
     }
   },
   mounted () {
